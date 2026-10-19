@@ -1,10 +1,12 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 
 //タイトルのみで機能する
 public class Set_Title_Script : MonoBehaviour
 {
+
+    [SerializeField] private string Titleload_Scene;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,4 +30,11 @@ public class Set_Title_Script : MonoBehaviour
             Application.Quit();
         }
     }
+    public void OnClickStartButton()
+    {
+        //シーンを移動する
+        SceneManager.LoadScene(Titleload_Scene);
+        Debug.Log("シーン移動");
+    }
+
 }
