@@ -26,6 +26,7 @@ public class Set_Title_Script : MonoBehaviour
         //ESC‚ğ‰Ÿ‚µ‚½‚Æ‚«
         if (Input.GetKey(KeyCode.Escape))
         {
+            Cursor.lockState = CursorLockMode.None;//D‚«‚È‚æ‚¤‚É“®‚©‚¹‚é
             //ƒQ[ƒ€I—¹
             Application.Quit();
         }

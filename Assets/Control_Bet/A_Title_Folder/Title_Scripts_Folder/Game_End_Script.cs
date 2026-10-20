@@ -31,6 +31,7 @@ public class Game_End_Script : MonoBehaviour
     public void EndGame()
     {
         //ゲーム終了
+        Cursor.lockState = CursorLockMode.None;//好きなように動かせる
         Application.Quit();
         Debug.Log("Yes_ゲーム終了");
     }
