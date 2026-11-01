@@ -5,12 +5,22 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 //プレイヤーを操作するプログラム
 public class Player_Script : MonoBehaviour
 {
-
+    //キャラクターコントローラー
     private CharacterController controller;
 
+    //カメラ
+    Camera Camera_Player_Limmit;
     //速度
     private Vector3 velocity;
-    public Vector3 Inital_Pos;
+
+    //プレイヤーの位置
+    private Vector3 Player_Pos;
+
+    //プレイヤーの体力
+    public int Player_Hp = 0;
+
+    //プレイヤーの大きさ
+    public float Player_Height = 0.0f;
 
     //------移動-------
     public bool pMove = false;//移動可能状態
@@ -19,31 +29,55 @@ public class Player_Script : MonoBehaviour
     public float Max_Speed = 100.0f;//速度制限
 
     public float Y_Limitto = 5.0f;//ｙ軸制限
+    
     //----------------
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //カメラの情報を取得
+        Camera_Player_Limmit = Camera.main;
+
+
         //初期化
         pMove = true;
 
+        //キャラクターコントローラーの情報を取得
         controller = GetComponent<CharacterController>();
+
         //現在の位置
-        Vector3 Inital_Pos = transform.position;
+        Vector3 Player_Pos = transform.position;
+
+        //プレイヤーのサイズを取得
+        Player_Height = controller.bounds.extents.y;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //移動処理
+        //プレイヤーの移動を0
         Vector3 move = Vector3.zero;
-        Inital_Pos.y = Mathf.Clamp(Inital_Pos.y, -Y_Limitto, Y_Limitto);
-        transform.position = Inital_Pos;
 
+        //カメラの描画の上情報
+        Vector3 Screen_Up_Limmit = 
+            Camera_Player_Limmit.ViewportToWorldPoint(new Vector3(0.5f, 1, 
+            Camera_Player_Limmit.WorldToScreenPoint(transform.position).z));
+
+        //カメラの描画の下情報
+        Vector3 Screen_Down_Limmit =
+            Camera_Player_Limmit.ViewportToWorldPoint(new Vector3(0.5f, 0,
+            Camera_Player_Limmit.WorldToScreenPoint(transform.position).z));
+
+        //移動処理
         if (pMove == true)
         {
-            if(Move_Speed < Max_Speed)
+            Debug.Log("プレイヤー移動可能");
+
+            //前進する速度の上限を超えないようにする
+            if (Move_Speed < Max_Speed)
             {
                 //常にプレイヤーを右方向へ力を加える
                 move = transform.right * Move_Speed ;
@@ -54,26 +88,50 @@ public class Player_Script : MonoBehaviour
             {
                  //上昇させる
                 velocity.y = 5.0f;
+                //Debug.Log("プレイヤー上昇 : " + velocity.y);
             }
             else
             {
                 //重力
                 velocity.y = -5.0f;  // 地面に押し付ける
+
             }
             
         }
 
+        //実行
         //if (Input.GetKey(KeyCode.Mouse1))
         //{
 
         //}
 
         //-----------移動実行-------------
-        //上下
+
+        //上下に動かす
         move.y = velocity.y;
         
         controller.Move(move * Time.deltaTime);
-        
+
         //-----------移動実行-------------
+
+        //-----------移動制限-------------
+        Player_Pos = transform.position;
+
+        //上方向の画面外にプレイヤーを出さないようにする
+        if (Player_Pos.y + Player_Height > Screen_Up_Limmit.y)
+        {
+            //留める
+            Player_Pos.y = Screen_Up_Limmit.y - Player_Height;
+        }
+        //下方向の画面外にプレイヤーを出さないようにする
+        if (Player_Pos.y - Player_Height < Screen_Down_Limmit.y)
+        {
+            //留める
+            Player_Pos.y = Screen_Down_Limmit.y + Player_Height;
+        }
+
+        transform.position = Player_Pos;
+
+        //-----------移動制限-------------
     }
 }
