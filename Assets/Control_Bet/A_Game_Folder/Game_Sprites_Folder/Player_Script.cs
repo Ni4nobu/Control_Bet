@@ -74,7 +74,7 @@ public class Player_Script : MonoBehaviour
         //移動処理
         if (pMove == true)
         {
-            Debug.Log("プレイヤー移動可能");
+           // Debug.Log("プレイヤー移動可能");
 
             //前進する速度の上限を超えないようにする
             if (Move_Speed < Max_Speed)
@@ -133,5 +133,23 @@ public class Player_Script : MonoBehaviour
         transform.position = Player_Pos;
 
         //-----------移動制限-------------
+    }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("Enemy_tag"))
+        {
+            Debug.Log("プレイヤー：敵と接触");
+            if(Player_Hp <= 0)
+            {
+                //体力がなければ死亡w
+                Destroy(gameObject);
+            }
+            if (Player_Hp >= 0)
+            {
+                Player_Hp--;
+            }
+
+
+        }
     }
 }
