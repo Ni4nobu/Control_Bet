@@ -141,11 +141,13 @@ public class Player_Script : MonoBehaviour
             Debug.Log("ƒvƒŒƒCƒ„[F“G‚ÆÚG");
             if(Player_Hp <= 0)
             {
-                //‘Ì—Í‚ª‚È‚¯‚ê‚Î€–Sw
+                //‘Ì—Í‚ª‚È‚¯‚ê‚Î€–S
                 Destroy(gameObject);
             }
+            //‘Ì—Í‚ª‚ ‚ê‚Î
             if (Player_Hp >= 0)
             {
+                //HP‚ğŒ¸‚ç‚·
                 Player_Hp--;
             }
 
