@@ -17,6 +17,7 @@ public class Enemy_Script : MonoBehaviour
 
     public int Dead_Namber = 0;
 
+
     //------------------------------
 
     //------------時間--------------
@@ -36,7 +37,7 @@ public class Enemy_Script : MonoBehaviour
     void Start()
     {
         //初期化
-        eMove = true;
+        eMove = false;
 
     }
 
@@ -56,7 +57,7 @@ public class Enemy_Script : MonoBehaviour
 
             if (Time_Elapsed >= Time_Out)
             {
-                Time_Move = 50.0f; 
+                Time_Move = 30.0f; 
                 Time_Elapsed = 0.0f;
             }
             if(Time_Elapsed >= Rush)
@@ -64,14 +65,31 @@ public class Enemy_Script : MonoBehaviour
                 Time_Move = 5.0f;
             }
             //プレイヤーから遠ければ
-            if (Vector3.Distance(Player.position,transform.position) >100.0f)
+            if (Vector3.Distance(Player.position,transform.position) >50.0f)
             {
                 //このオブジェクトを削除
+                Debug.Log("敵を削除");
                 Destroy(gameObject);
             }
-
+            transform.position += (Distance * Time_Move * Time.deltaTime);
         }
-        transform.position += (Distance * Time_Move * Time.deltaTime);
+        
 
+    }
+    void OnBecameInvisible()
+    {
+        // enabled = false;
+        if (eMove == true)
+        {
+            //このオブジェクトを削除
+            Debug.Log("敵を削除");
+            Destroy(gameObject);
+        }
+    }
+
+    void OnBecameVisible()
+    {
+        eMove = true;
+        //enabled = true; 
     }
 }

@@ -52,7 +52,7 @@ public class Player_Script : MonoBehaviour
         //プレイヤーのサイズを取得
         Player_Height = controller.bounds.extents.y;
 
-        
+        Player_Hp = 1;
     }
 
     // Update is called once per frame
@@ -142,10 +142,11 @@ public class Player_Script : MonoBehaviour
             if(Player_Hp <= 0)
             {
                 //体力がなければ死亡
+                Player_Hp = 0;
                 Destroy(gameObject);
             }
             //体力があれば
-            if (Player_Hp >= 0)
+            if (Player_Hp > 0)
             {
                 //HPを減らす
                 Player_Hp--;
