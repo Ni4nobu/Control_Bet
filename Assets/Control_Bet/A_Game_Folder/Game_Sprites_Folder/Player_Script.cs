@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.SceneManagement;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 //プレイヤーを操作するプログラム
 public class Player_Script : MonoBehaviour
@@ -10,6 +11,8 @@ public class Player_Script : MonoBehaviour
 
     //カメラ
     Camera Camera_Player_Limmit;
+
+    [SerializeField] private string Select_Scene;
     //速度
     private Vector3 velocity;
 
@@ -29,9 +32,17 @@ public class Player_Script : MonoBehaviour
     public float Max_Speed = 100.0f;//速度制限
 
     public float Y_Limitto = 5.0f;//ｙ軸制限
-    
+
     //----------------
 
+    //------無敵時間------
+
+    public float Unrivaled_Timer = 0.0f;//無敵時間
+
+    public bool Unrivaled_State = false;
+
+
+    //--------------------
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -52,7 +63,9 @@ public class Player_Script : MonoBehaviour
         //プレイヤーのサイズを取得
         Player_Height = controller.bounds.extents.y;
 
-        Player_Hp = 1;
+        Player_Hp = 5;
+
+        Application.targetFrameRate = 30;
     }
 
     // Update is called once per frame
@@ -62,6 +75,7 @@ public class Player_Script : MonoBehaviour
         Vector3 move = Vector3.zero;
 
         //カメラの描画の上情報
+
         Vector3 Screen_Up_Limmit = 
             Camera_Player_Limmit.ViewportToWorldPoint(new Vector3(0.5f, 1, 
             Camera_Player_Limmit.WorldToScreenPoint(transform.position).z));
@@ -132,7 +146,23 @@ public class Player_Script : MonoBehaviour
 
         transform.position = Player_Pos;
 
-        //-----------移動制限-------------
+        //--------------------------------
+
+        //無敵
+        if (Unrivaled_State == true)
+        {
+            Unrivaled_Timer += Time.deltaTime;
+            Debug.Log("無敵状態");
+            //無敵時間用タイマー
+
+
+            if (Unrivaled_Timer >= 3f)
+            {
+                Unrivaled_Timer = 0.0f;
+                Unrivaled_State = false;//通常状態
+                Debug.Log("無敵状態終わり");
+            }
+        }
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -144,15 +174,22 @@ public class Player_Script : MonoBehaviour
                 //体力がなければ死亡
                 Player_Hp = 0;
                 Destroy(gameObject);
+                //ゲームオーバーシーンへ移動する
+                SceneManager.LoadScene(Select_Scene);
+                Debug.Log("シーン移動");
             }
             //体力があれば
-            if (Player_Hp > 0)
+            if (Player_Hp > 0 && Unrivaled_State == false)
             {
                 //HPを減らす
                 Player_Hp--;
+                Unrivaled_State = true;//無敵状態
+               
             }
 
 
         }
     }
+
+   
 }
