@@ -6,7 +6,7 @@ public class Enemy_Script : MonoBehaviour
     //プレイヤー
    　public Transform Player;
 
-
+   
     //------------移動--------------
     public bool eMove = false;//移動可能状態
 
@@ -20,18 +20,6 @@ public class Enemy_Script : MonoBehaviour
 
     //------------------------------
 
-    //------------時間--------------
-
-    //制限時間
-    public float Time_Out = 1.0f;
-
-    //突進時間
-    public float Rush = 5.0f;
-
-    //タイマー
-    private float Time_Elapsed = 0.0f;
-
-    //------------------------------
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,23 +41,15 @@ public class Enemy_Script : MonoBehaviour
         if (eMove == true)
         {
             Distance.Normalize();
-            Time_Elapsed += Time.deltaTime;
-
-            if (Time_Elapsed >= Time_Out)
-            {
-                Time_Move = 30.0f; 
-                Time_Elapsed = 0.0f;
-            }
-            if(Time_Elapsed >= Rush)
-            {
-                Time_Move = 5.0f;
-            }
+            
             //プレイヤーから遠ければ
-            if (Vector3.Distance(Player.position,transform.position) >50.0f)
+            if (Vector3.Distance(Player.position,transform.position) <30.0f)
             {
-                //このオブジェクトを削除
-                Debug.Log("敵を削除");
-                Destroy(gameObject);
+                Time_Move = 2.0f;
+            }
+            else
+            {
+                Time_Move = 20.0f;
             }
             transform.position += (Distance * Time_Move * Time.deltaTime);
         }

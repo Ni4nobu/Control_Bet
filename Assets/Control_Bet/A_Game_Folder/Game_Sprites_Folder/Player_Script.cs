@@ -1,17 +1,22 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using static UnityEngine.GraphicsBuffer;
+
 //プレイヤーを操作するプログラム
 public class Player_Script : MonoBehaviour
 {
     //キャラクターコントローラー
     private CharacterController controller;
-
+    
     //カメラ
     Camera Camera_Player_Limmit;
 
+    //シーン
     [SerializeField] private string Select_Scene;
     //速度
     private Vector3 velocity;
@@ -26,6 +31,7 @@ public class Player_Script : MonoBehaviour
     public float Player_Height = 0.0f;
 
     //------移動-------
+    [SerializeField, Header("移動")]
     public bool pMove = false;//移動可能状態
 
     public float Move_Speed = 10.0f;//速度
@@ -37,11 +43,20 @@ public class Player_Script : MonoBehaviour
 
     //------無敵時間------
 
-    public float Unrivaled_Timer = 0.0f;//無敵時間
+    [SerializeField, Header("無敵時間")]
+    private float _invincibleDuration = 2.0f;
+    //無敵用タイマー
+    public float Unrivaled_Timer = 0.0f;
 
+    //無敵状態
     public bool Unrivaled_State = false;
 
+    //点滅間隔
+    [SerializeField, Header("点滅間隔")]
+    private float _blinkInterval = 0.1f;
 
+    private SpriteRenderer _spriteRenderer;
+    private Color _defaultColor;
     //--------------------
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,8 +79,6 @@ public class Player_Script : MonoBehaviour
         Player_Height = controller.bounds.extents.y;
 
         Player_Hp = 5;
-
-        Application.targetFrameRate = 30;
     }
 
     // Update is called once per frame
@@ -126,7 +139,7 @@ public class Player_Script : MonoBehaviour
         
         controller.Move(move * Time.deltaTime);
 
-        //-----------移動実行-------------
+        //--------------------------------
 
         //-----------移動制限-------------
         Player_Pos = transform.position;
@@ -148,20 +161,47 @@ public class Player_Script : MonoBehaviour
 
         //--------------------------------
 
-        //無敵
+       
+
+
+        //-------------無敵---------------
         if (Unrivaled_State == true)
         {
+            Debug.Log("無敵状態開始");
+            // 内部時刻を経過させる
             Unrivaled_Timer += Time.deltaTime;
-            Debug.Log("無敵状態");
+
+            //---------点滅-----------
+            
+            //-------------------------
+
             //無敵時間用タイマー
-
-
-            if (Unrivaled_Timer >= 3f)
+            if (Unrivaled_Timer >= _invincibleDuration)
             {
-                Unrivaled_Timer = 0.0f;
+                //解除
                 Unrivaled_State = false;//通常状態
-                Debug.Log("無敵状態終わり");
+                Debug.Log("無敵解除");
             }
+        }
+
+        //--------------------------------
+    }
+    private void Awake()
+    {
+        // _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        //_spriteRendererの取得
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        if (_spriteRenderer != null)
+        {
+            _defaultColor = _spriteRenderer.color;
+
+            Debug.Log("SpriteRenderer取得成功：" + _spriteRenderer.gameObject.name);
+        }
+        else
+        {
+            Debug.LogError("SpriteRenderer取得失敗:" + _spriteRenderer.gameObject.name);
         }
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -169,7 +209,23 @@ public class Player_Script : MonoBehaviour
         if (hit.gameObject.CompareTag("Enemy_tag"))
         {
             Debug.Log("プレイヤー：敵と接触");
-            if(Player_Hp <= 0)
+
+            //無敵状態ならダメージを受けない
+            if(Unrivaled_State == true)
+            {
+                return;
+            }
+            else if (Player_Hp > 0 && Unrivaled_State == false)
+            {
+                //HPを減らす
+                Player_Hp--;
+                //無敵時間初期化
+                Unrivaled_Timer = 0.0f;
+                Unrivaled_State = true;//無敵状態
+                                       
+                StartCoroutine(Unrivaled());//点滅開始
+            }
+            if (Player_Hp <= 0)
             {
                 //体力がなければ死亡
                 Player_Hp = 0;
@@ -179,17 +235,26 @@ public class Player_Script : MonoBehaviour
                 Debug.Log("シーン移動");
             }
             //体力があれば
-            if (Player_Hp > 0 && Unrivaled_State == false)
-            {
-                //HPを減らす
-                Player_Hp--;
-                Unrivaled_State = true;//無敵状態
-               
-            }
-
-
+            
         }
     }
+    private IEnumerator Unrivaled()
+    {
+        // 経過時間が設定した無敵時間を超えるまで点滅処理を繰り返す
+        while (Unrivaled_State)
+        {
+            _spriteRenderer.enabled = false;
 
+            // 設定した点滅間隔だけ処理を待つ
+            yield return new WaitForSeconds(_blinkInterval);
+
+            _spriteRenderer.enabled = true;
+
+            // 再び設定した点滅間隔だけ処理を待つ
+            yield return new WaitForSeconds(_blinkInterval);
+
+        }
+        _spriteRenderer.enabled = true;
+    }
    
 }
