@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+//敵オブジェクト　幽霊
 public class Enemy_Script : MonoBehaviour
 {
 
@@ -62,7 +64,7 @@ public class Enemy_Script : MonoBehaviour
         if (eMove == true)
         {
             //このオブジェクトを削除
-            Debug.Log("敵を削除");
+            Debug.Log("敵:幽霊を削除");
             Destroy(gameObject);
         }
     }

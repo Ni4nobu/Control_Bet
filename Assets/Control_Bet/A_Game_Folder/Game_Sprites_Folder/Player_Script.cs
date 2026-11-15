@@ -219,6 +219,9 @@ public class Player_Script : MonoBehaviour
             {
                 //HPを減らす
                 Player_Hp--;
+                //敵オブジェクトを消す
+                Destroy(hit.gameObject);
+
                 //無敵時間初期化
                 Unrivaled_Timer = 0.0f;
                 Unrivaled_State = true;//無敵状態
