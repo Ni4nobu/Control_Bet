@@ -193,16 +193,6 @@ public class Player_Script : MonoBehaviour
         //_spriteRendererの取得
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
-        if (_spriteRenderer != null)
-        {
-            _defaultColor = _spriteRenderer.color;
-
-            Debug.Log("SpriteRenderer取得成功：" + _spriteRenderer.gameObject.name);
-        }
-        else
-        {
-            Debug.LogError("SpriteRenderer取得失敗:" + _spriteRenderer.gameObject.name);
-        }
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -215,6 +205,7 @@ public class Player_Script : MonoBehaviour
             {
                 return;
             }
+            //体力があれば
             else if (Player_Hp > 0 && Unrivaled_State == false)
             {
                 //HPを減らす
@@ -237,7 +228,7 @@ public class Player_Script : MonoBehaviour
                 SceneManager.LoadScene(Select_Scene);
                 Debug.Log("シーン移動");
             }
-            //体力があれば
+            
             
         }
     }
@@ -246,6 +237,8 @@ public class Player_Script : MonoBehaviour
         // 経過時間が設定した無敵時間を超えるまで点滅処理を繰り返す
         while (Unrivaled_State)
         {
+            //移動不可
+            controller.enabled = false;
             _spriteRenderer.enabled = false;
 
             // 設定した点滅間隔だけ処理を待つ
@@ -258,6 +251,8 @@ public class Player_Script : MonoBehaviour
 
         }
         _spriteRenderer.enabled = true;
+        //移動可
+        controller.enabled = true;
     }
    
 }
