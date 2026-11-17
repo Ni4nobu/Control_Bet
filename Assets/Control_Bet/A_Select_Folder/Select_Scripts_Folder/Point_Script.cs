@@ -5,6 +5,7 @@ public class Point_Script : MonoBehaviour
 {
     public TMP_Text Point_text;
 
+
     public int Point = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
