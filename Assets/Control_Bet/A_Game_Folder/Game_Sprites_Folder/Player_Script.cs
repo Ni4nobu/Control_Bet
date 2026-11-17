@@ -4,12 +4,13 @@ using UnityEngine.Animations;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
-using static UnityEngine.GraphicsBuffer;
+
 
 //プレイヤーを操作するプログラム
 public class Player_Script : MonoBehaviour
 {
+    //HPを購入するスクリプト
+    public HP_Buy_Script HP_Buy_Script_Obj;
     //キャラクターコントローラー
     private CharacterController controller;
     
@@ -25,7 +26,7 @@ public class Player_Script : MonoBehaviour
     private Vector3 Player_Pos;
 
     //プレイヤーの体力
-    public int Player_Hp = 0;
+    public int Player_Hp;
 
     //プレイヤーの大きさ
     public float Player_Height = 0.0f;
@@ -78,7 +79,7 @@ public class Player_Script : MonoBehaviour
         //プレイヤーのサイズを取得
         Player_Height = controller.bounds.extents.y;
 
-        //Player_Hp = 5;
+        Player_Hp = HP_Buy_Script_Obj.Player_Script.Player_Hp;
     }
 
     // Update is called once per frame
@@ -125,7 +126,13 @@ public class Player_Script : MonoBehaviour
             }
             
         }
-
+        //ESCを押したとき
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;//好きなように動かせる
+            //ゲーム終了
+            Application.Quit();
+        }
         //実行
         //if (Input.GetKey(KeyCode.Mouse1))
         //{

@@ -7,6 +7,7 @@ public class Point_Script : MonoBehaviour
 
 
     public int Point = 0;
+    public int Point_Bet = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,6 +17,7 @@ public class Point_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Point_text.text = Point + "P";
+        Point_Bet = Point;
+        Point_text.text = Point_Bet + "P";
     }
 }
