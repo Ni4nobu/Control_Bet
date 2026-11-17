@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Set_Select_Script : MonoBehaviour
 {
+    public Player_Script Player_Script;
 
     [SerializeField] private string Game_Scene;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,8 +32,12 @@ public class Set_Select_Script : MonoBehaviour
     }
     public void OnClickStartButton_Game()
     {
-        //ゲームシーンへ移動する
-        SceneManager.LoadScene(Game_Scene);
-        Debug.Log("シーン移動");
+        if(Player_Script.Player_Hp > 0)
+        {
+            //ゲームシーンへ移動する
+            SceneManager.LoadScene(Game_Scene);
+            Debug.Log("シーン移動");
+        }
+       
     }
 }

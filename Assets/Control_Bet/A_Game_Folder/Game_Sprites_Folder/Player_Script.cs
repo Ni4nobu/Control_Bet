@@ -78,7 +78,7 @@ public class Player_Script : MonoBehaviour
         //プレイヤーのサイズを取得
         Player_Height = controller.bounds.extents.y;
 
-        Player_Hp = 5;
+        //Player_Hp = 5;
     }
 
     // Update is called once per frame
