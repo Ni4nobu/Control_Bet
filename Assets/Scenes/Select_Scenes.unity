@@ -360,6 +360,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player_Script: {fileID: 7431357088159210375, guid: 7d695d764efec314da992239d9b40cd6, type: 3}
+  MAP0_text: {fileID: 1985682162}
+  MAP1_text: {fileID: 147277838}
+  MAP2_text: {fileID: 926871044}
+  Point_Script_obj: {fileID: 503419219}
+  Reword: 0
+  money: 0
   Game_Scene: Game_Scenes
 --- !u!1 &147277836
 GameObject:
@@ -373,7 +379,7 @@ GameObject:
   - component: {fileID: 147277839}
   - component: {fileID: 147277838}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MAP1Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +424,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30B9\u30C6\u30FC\u30B8\uFF1A\u68EE\n\u76EE\u6A19\uFF1A\u751F\u5B58\n\u5831\u916C\uFF1A"
+  m_text: "\u30B9\u30C6\u30FC\u30B8\uFF1A\u68EE\n\u76EE\u6A19\uFF1A\u751F\u5B58\n\u5831\u916C\uFF1A9999"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 742c27895d3bd51449803da569038e0c, type: 2}
   m_sharedMaterial: {fileID: 2711989062437025929, guid: 742c27895d3bd51449803da569038e0c, type: 2}
@@ -445,8 +451,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 73.7
-  m_fontSizeBase: 73.7
+  m_fontSize: 59.05
+  m_fontSizeBase: 59.05
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -684,15 +690,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5330188, g: 1, b: 0.95278335, a: 1}
+  m_Color: {r: 0.25, g: 1, b: 0.92436975, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 5b49497433c5dfa4eaecd328db7c9f92, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1007,7 +1013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 292.12, y: 95.29999}
+  m_AnchoredPosition: {x: 436.06, y: 95.29999}
   m_SizeDelta: {x: 400, y: 200.68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661455843
@@ -1290,7 +1296,7 @@ GameObject:
   - component: {fileID: 926871045}
   - component: {fileID: 926871044}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MAP2Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1362,8 +1368,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 73.7
-  m_fontSizeBase: 73.7
+  m_fontSize: 59.05
+  m_fontSizeBase: 59.05
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1459,7 +1465,7 @@ GameObject:
   - component: {fileID: 963010310}
   - component: {fileID: 963010311}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Point_Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1485,7 +1491,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 88.5}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 600, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &963010311
 MonoBehaviour:
@@ -1534,7 +1540,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.48
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2300,7 +2306,7 @@ GameObject:
   - component: {fileID: 1985682163}
   - component: {fileID: 1985682162}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MAP0Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2345,7 +2351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30B9\u30C6\u30FC\u30B8\uFF1A\u68EE\n\u76EE\u6A19\uFF1A\u751F\u5B58\n\u5831\u916C\uFF1A"
+  m_text: "\u30B9\u30C6\u30FC\u30B8\uFF1A\u68EE\n\u76EE\u6A19\uFF1A\u751F\u5B58\n\u5831\u916C\uFF1A1174P"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 742c27895d3bd51449803da569038e0c, type: 2}
   m_sharedMaterial: {fileID: 2711989062437025929, guid: 742c27895d3bd51449803da569038e0c, type: 2}
@@ -2372,8 +2378,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 73.7
-  m_fontSizeBase: 73.7
+  m_fontSize: 59.05
+  m_fontSizeBase: 59.05
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2440,6 +2446,10 @@ PrefabInstance:
       propertyPath: Point_text
       value: 
       objectReference: {fileID: 661455843}
+    - target: {fileID: 4746261666607619234, guid: 9dae335429fc08a46b1f736fa3561451, type: 3}
+      propertyPath: PointSlider
+      value: 
+      objectReference: {fileID: 963010311}
     - target: {fileID: 6779224713738089777, guid: 9dae335429fc08a46b1f736fa3561451, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
