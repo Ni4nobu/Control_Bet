@@ -6,36 +6,31 @@ public class My_Mouse_Display_Script : MonoBehaviour
     //Canvasの参照
     public Canvas Canvas_obj;
 
-    public RectTransform Canvas_objTransform;
+    public RectTransform Canvas_obj_Transform;//キャンバスの位置
 
-    public RectTransform _cursorTransform;
+    public GameObject Mouse_Image;//マウスの位置に表示する画像obj
+
+    public RectTransform Mouse_Image_Transform;//マウス画像の位置
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //// オブジェクトの取得
-        //GameObject image_object = GameObject.Find("Image");
-        //// コンポーネントの取得
-        //Image image_component = image_object.GetComponent<Image>();
+        //Mouse_Image_Transform = Mouse_Image.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //マウスの位置
-        Vector3 mousePos = Input.mousePosition;
-        {
-            Debug.Log(mousePos.x);
-            Debug.Log(mousePos.y);
-        }
+
         // CanvasのRectTransform内にあるマウスの座標をローカル座標に変換する
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            Canvas_objTransform,
+        RectTransformUtility.ScreenPointToLocalPointInRectangle
+        (
+            Canvas_obj_Transform,
             Input.mousePosition,
             Canvas_obj.worldCamera,
-            out var mousePosition);
+            out var mousePosition
+        );
 
-        // ポインターをマウスの座標に移動する
-        _cursorTransform.anchoredPosition = new Vector2(mousePosition.x, mousePosition.y);
-
+        Mouse_Image_Transform.anchoredPosition = new Vector2(mousePosition.x, mousePosition.y);
     }
 }

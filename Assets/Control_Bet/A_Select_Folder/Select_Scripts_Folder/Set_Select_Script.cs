@@ -35,7 +35,9 @@ public class Set_Select_Script : MonoBehaviour
         if(Player_Script.Player_Hp > 0)
         {
             //ゲームシーンへ移動する
+            
             SceneManager.LoadScene(Game_Scene);
+            Cursor.visible = false;//マウスを非表示
             Debug.Log("シーン移動");
         }
        

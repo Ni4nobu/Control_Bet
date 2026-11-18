@@ -11,7 +11,7 @@ public class Set_Title_Script : MonoBehaviour
     void Start()
     {
         //カーソル設定
-        Cursor.visible = true;//マウスを表示
+       Cursor.visible = true;//マウスを表示
         //Cursor.visible = false;//マウスを非表示
 
         //カーソル操作
