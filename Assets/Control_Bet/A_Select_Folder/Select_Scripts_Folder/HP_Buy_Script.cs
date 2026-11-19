@@ -15,6 +15,7 @@ public class HP_Buy_Script : MonoBehaviour
     void Start()
     {
         Player_Script.Player_Hp = Select_HP_num;
+        Select_HP_num++;
     }
 
     // Update is called once per frame
