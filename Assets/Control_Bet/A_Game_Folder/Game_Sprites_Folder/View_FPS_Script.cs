@@ -15,6 +15,8 @@ public class View_FPS_Script : MonoBehaviour
     private float _time_mn;
     private float _fps;
 
+    public bool Key_F2_One_Push = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,12 +25,45 @@ public class View_FPS_Script : MonoBehaviour
 
         // テキストコンポーネントの取得
         sampleText = GetComponent<TextMeshProUGUI>();
+
+        //表示を初期化
+        Key_F2_One_Push = false;
+
+        //ボタンを押さないと見えない状態にする
+        //  sampleText.gameObject.SetActive(false);
+        sampleText.enabled = false;
     }
 
     // FPSの表示と計算
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.F2))
+        {
+           // Debug.Log("キーが反応した");
+            if (Key_F2_One_Push == true)
+            {
+                Key_F2_One_Push = false;
+                Debug.Log("Key_F2_One_Push = false");
+            }
+
+            else if(Key_F2_One_Push == false)
+            {
+                Key_F2_One_Push = true;
+                Debug.Log(" Key_F2_One_Push = true");
+            }
+            
+        }
+        if(Key_F2_One_Push == true)
+        {
+            //sampleText.gameObject.SetActive(true);
+            sampleText.enabled = true;
+        }
+        else if(Key_F2_One_Push == false)
+        {
+           // sampleText.gameObject.SetActive(false);
+            sampleText.enabled = false;
+        }
         _time_mn -= Time.deltaTime;
         _time_cnt += Time.timeScale / Time.deltaTime;
         _frames++;
