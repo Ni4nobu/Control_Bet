@@ -368,6 +368,18 @@ MonoBehaviour:
   Reword_Random_0: 0
   Reword_Random_1: 0
   Reword_Random_2: 0
+  Random_Objective0: 0
+  Random_Objective1: 0
+  Random_Objective2: 0
+  Objective_View0: 
+  Objective_View1: 
+  Objective_View2: 
+  Random_Map_0: 0
+  Random_Map_1: 0
+  Random_Map_2: 0
+  Map_View0: 
+  Map_View1: 
+  Map_View2: 
   num0: 0
   Game_Scene: Game_Scenes
 --- !u!1 &147277836
@@ -404,8 +416,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -77.850006, y: 70.29997}
-  m_SizeDelta: {x: -226.3, y: -205.39993}
+  m_AnchoredPosition: {x: 6.649994, y: 70.29997}
+  m_SizeDelta: {x: -57.299995, y: -205.39993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &147277838
 MonoBehaviour:
@@ -1457,8 +1469,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -77.850006, y: 70.29997}
-  m_SizeDelta: {x: -226.3, y: -205.39993}
+  m_AnchoredPosition: {x: 6.649994, y: 70.29997}
+  m_SizeDelta: {x: -57.299995, y: -205.39993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &926871044
 MonoBehaviour:
@@ -2468,8 +2480,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -77.850006, y: 70.29997}
-  m_SizeDelta: {x: -226.3, y: -205.39993}
+  m_AnchoredPosition: {x: 6.6502075, y: 70.29997}
+  m_SizeDelta: {x: -57.300415, y: -205.39993}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1985682162
 MonoBehaviour:
