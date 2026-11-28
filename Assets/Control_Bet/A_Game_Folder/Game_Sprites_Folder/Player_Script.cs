@@ -177,9 +177,9 @@ public class Player_Script : MonoBehaviour
             Debug.Log("無敵状態開始");
             // 内部時刻を経過させる
             Unrivaled_Timer += Time.deltaTime;
-
+            velocity.y = 0.0f;
             //---------点滅-----------
-            
+
             //-------------------------
 
             //無敵時間用タイマー
@@ -215,6 +215,7 @@ public class Player_Script : MonoBehaviour
             //体力があれば
             else if (Player_Hp > 0 && Unrivaled_State == false)
             {
+                Debug.Log("体力減った");
                 //HPを減らす
                 Player_Hp--;
                 //敵オブジェクトを消す
@@ -228,12 +229,13 @@ public class Player_Script : MonoBehaviour
             }
             if (Player_Hp <= 0)
             {
+                Debug.Log("死亡");
                 //体力がなければ死亡
                 Player_Hp = 0;
                 Destroy(gameObject);
                 //ゲームオーバーシーンへ移動する
                 SceneManager.LoadScene(Select_Scene);
-                Debug.Log("シーン移動");
+                Debug.Log("ゲームオーバーシーン移動");
             }
             
             
@@ -241,25 +243,28 @@ public class Player_Script : MonoBehaviour
     }
     private IEnumerator Unrivaled()
     {
+        Debug.Log("IEnumerator Unrivaled開始");
         // 経過時間が設定した無敵時間を超えるまで点滅処理を繰り返す
         while (Unrivaled_State)
         {
             //移動不可
-            controller.enabled = false;
+            //controller.enabled = false;
+            pMove = false;
             _spriteRenderer.enabled = false;
-
+            Debug.Log("_spriteRenderer.enabled = false;");
             // 設定した点滅間隔だけ処理を待つ
             yield return new WaitForSeconds(_blinkInterval);
-
+           
             _spriteRenderer.enabled = true;
-
+            Debug.Log("_spriteRenderer.enabled = true;");
             // 再び設定した点滅間隔だけ処理を待つ
             yield return new WaitForSeconds(_blinkInterval);
 
         }
         _spriteRenderer.enabled = true;
         //移動可
-        controller.enabled = true;
+        pMove = true;
+        //controller.enabled = true;
     }
    
 }
